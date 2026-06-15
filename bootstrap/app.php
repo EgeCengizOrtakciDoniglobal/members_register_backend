@@ -14,8 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // Entegrasyon ucu için statik API Key middleware takma adı.
+        // 'admin' takma adı yalnızca yönetici rolündeki kullanıcılara izin verir.
         $middleware->alias([
             'apikey' => \App\Http\Middleware\VerifyApiKey::class,
+            'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

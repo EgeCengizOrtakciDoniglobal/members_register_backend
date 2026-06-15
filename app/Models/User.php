@@ -29,6 +29,7 @@ class User extends Authenticatable
         'mail',
         'password',
         'status',
+        'role',
     ];
 
     /**
@@ -50,5 +51,13 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Kullanıcının yönetici (admin) olup olmadığını döner.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 }
