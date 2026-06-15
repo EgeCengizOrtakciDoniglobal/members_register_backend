@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('mail')->unique();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->enum('status', ['active', 'inactive', 'pending'])->default('active');
+            $table->dateTime('create_date')->useCurrent();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
